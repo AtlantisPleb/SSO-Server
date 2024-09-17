@@ -37,6 +37,13 @@ Implementation Notes:
 - Implement token validation
 - Return user claims based on the scope of the access token
 
+Implementation Notes:
+- Added a new `userinfo` view function in `sso_server/oidc/views.py`
+- Utilized `django-oidc-provider`'s `UserInfoEndpoint` for token validation and claims generation
+- Implemented CSRF exemption for the userinfo endpoint using `@csrf_exempt` decorator
+- Added error handling for userinfo-related errors
+- Updated `sso_server/oidc/urls.py` to include the new userinfo endpoint URL
+
 ### 4. Support for standard OIDC scopes
 - Implement support for openid, profile, email, and other standard OIDC scopes
 - Create a mechanism to manage and validate requested scopes
@@ -72,6 +79,6 @@ Implementation Notes:
 ## Progress
 - [x] Implement authorization endpoint
 - [x] Implement token endpoint
-- [ ] Implement userinfo endpoint
+- [x] Implement userinfo endpoint
 - [ ] Support for standard OIDC scopes
 - [ ] Implement OIDC discovery endpoint
