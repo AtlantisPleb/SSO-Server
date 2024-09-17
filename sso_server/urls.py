@@ -6,12 +6,11 @@ from django.urls import path, include
 import sso_app.views
 
 urlpatterns = [
-
     path('admin/', admin.site.urls),
     path('accounts/', include('sso_app.urls')),
     path('', sso_app.views.home_view, name='custom_home'),
+    path('oidc/', include('sso_server.oidc.urls')),  # Add this line for our custom OIDC views
     path('', include('oidc_provider.urls', namespace='oidc_provider')),
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
