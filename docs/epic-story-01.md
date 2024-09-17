@@ -25,6 +25,13 @@ Implementation Notes:
 - Validate client credentials and authorization codes
 - Generate and return access tokens, ID tokens, and refresh tokens
 
+Implementation Notes:
+- Added a new `token` view function in `sso_server/oidc/views.py`
+- Utilized `django-oidc-provider`'s `TokenEndpoint` for token issuance and validation
+- Implemented CSRF exemption for the token endpoint using `@csrf_exempt` decorator
+- Added error handling for token-related errors
+- Updated `sso_server/oidc/urls.py` to include the new token endpoint URL
+
 ### 3. Implement userinfo endpoint
 - Create a new view in Django for the userinfo endpoint
 - Implement token validation
@@ -64,7 +71,7 @@ Implementation Notes:
 
 ## Progress
 - [x] Implement authorization endpoint
-- [ ] Implement token endpoint
+- [x] Implement token endpoint
 - [ ] Implement userinfo endpoint
 - [ ] Support for standard OIDC scopes
 - [ ] Implement OIDC discovery endpoint
