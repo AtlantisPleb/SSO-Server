@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from oidc_provider.models import Client
 from oidc_provider.lib.endpoints.authorize import AuthorizeEndpoint
-from oidc_provider.lib.errors import AuthorizeError
+from oidc_provider.lib.endpoints.token import TokenEndpoint
+from oidc_provider.lib.errors import AuthorizeError, TokenError
 import logging
 
 logger = logging.getLogger(__name__)
@@ -48,4 +50,17 @@ def authorize(request):
         return redirect(uri)
     except Exception as error:
         logger.exception("An error occurred in the authorize view")
+        return JsonResponse({'error': 'server_error', 'error_description': str(error)}, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def token(request):
+    try:
+        token = TokenEndpoint(request)
+        token_response = token.create_response()
+        return JsonResponse(token_response)
+    except TokenError as error:
+        return JsonResponse(error.create_dict(), status=400)
+    except Exception as error:
+        logger.exception("An error occurred in the token view")
         return JsonResponse({'error': 'server_error', 'error_description': str(error)}, status=500)
