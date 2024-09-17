@@ -11,6 +11,14 @@ As a developer, I need to implement the core OIDC protocol so that the server ca
 - Handle user authentication and consent
 - Generate and return authorization code
 
+Implementation Notes:
+- Created a new file `sso_server/oidc/views.py` with an `authorize` view function
+- Implemented user authentication check using `@login_required` decorator
+- Added consent handling for users who haven't previously consented to the client
+- Utilized `django-oidc-provider`'s `AuthorizeEndpoint` for parameter validation and response creation
+- Created a template `sso_server/templates/oidc/authorize.html` for the consent page
+- Updated `sso_server/urls.py` to include the new OIDC URLs
+
 ### 2. Implement token endpoint
 - Create a new view in Django for the token endpoint
 - Implement token issuance for various grant types (authorization_code, refresh_token, etc.)
@@ -53,3 +61,10 @@ As a developer, I need to implement the core OIDC protocol so that the server ca
 ## Next Steps
 - After implementing the core OIDC protocol, proceed with the pseudonym generation system (User Story 2) to enhance privacy features
 - Consider implementing additional OIDC features such as dynamic client registration and revocation endpoints in future iterations
+
+## Progress
+- [x] Implement authorization endpoint
+- [ ] Implement token endpoint
+- [ ] Implement userinfo endpoint
+- [ ] Support for standard OIDC scopes
+- [ ] Implement OIDC discovery endpoint
