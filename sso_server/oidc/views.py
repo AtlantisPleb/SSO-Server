@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from oidc_provider.models import Client
 from oidc_provider.lib.endpoints.authorize import AuthorizeEndpoint
 from oidc_provider.lib.endpoints.token import TokenEndpoint
-from oidc_provider.lib.errors import AuthorizeError, TokenError
+from oidc_provider.lib.endpoints.userinfo import UserInfoEndpoint
+from oidc_provider.lib.errors import AuthorizeError, TokenError, UserInfoError
 import logging
 
 logger = logging.getLogger(__name__)
@@ -63,4 +64,17 @@ def token(request):
         return JsonResponse(error.create_dict(), status=400)
     except Exception as error:
         logger.exception("An error occurred in the token view")
+        return JsonResponse({'error': 'server_error', 'error_description': str(error)}, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def userinfo(request):
+    try:
+        userinfo = UserInfoEndpoint(request)
+        claims = userinfo.create_response()
+        return JsonResponse(claims)
+    except UserInfoError as error:
+        return JsonResponse(error.create_dict(), status=400)
+    except Exception as error:
+        logger.exception("An error occurred in the userinfo view")
         return JsonResponse({'error': 'server_error', 'error_description': str(error)}, status=500)
