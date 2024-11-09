@@ -23,7 +23,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
-    "https://sso-server.fly.dev/"
+    "https://sso-server.fly.dev"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -34,7 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
-    "https://sso-server.fly.dev/"
+    "https://sso-server.fly.dev"
 ]
 
 
