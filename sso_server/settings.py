@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 load_dotenv()
@@ -22,7 +23,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
-    "https://oidc1-052bc9374cf6.herokuapp.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -33,7 +33,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
-    "https://oidc1-052bc9374cf6.herokuapp.com"
 ]
 
 # Application definition
@@ -96,20 +95,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sso_server.wsgi.application'
 
+# Database configuration for both local and Heroku environments
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'connect_timeout': 10,
-        },
-        'CONN_MAX_AGE': 600,
-    }
+    'default': dj_database_url.config(
+        default='postgres://postgres:postgres@localhost:5432/sso_server',
+        conn_max_age=600,
+        ssl_require=False  # Set to True in production.py
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
