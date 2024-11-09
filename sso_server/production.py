@@ -3,7 +3,7 @@ from .settings import *
 import dj_database_url
 
 DEBUG = False
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'oidc1-052bc9374cf6.herokuapp.com']
 
 # Database
 DATABASES = {
@@ -29,3 +29,12 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Ensure we're using PostgreSQL
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+
+# Add your Heroku app domain to CORS and CSRF settings
+CORS_ALLOWED_ORIGINS = [
+    'https://oidc1-052bc9374cf6.herokuapp.com',
+] + CORS_ALLOWED_ORIGINS
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://oidc1-052bc9374cf6.herokuapp.com',
+] + CSRF_TRUSTED_ORIGINS
