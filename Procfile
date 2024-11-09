@@ -1,1 +1,1 @@
-web: gunicorn sso_server.wsgi:application --env DJANGO_SETTINGS_MODULE=sso_server.production --log-file -
+web: gunicorn sso_server.wsgi:application
