@@ -23,7 +23,7 @@ console_command = '/code/manage.py shell'
   cpus = 1
   memory_mb = 2048
 
-[mounts]
+[[mounts]]
   source = "mysqldata"
   destination = "/data"
 
