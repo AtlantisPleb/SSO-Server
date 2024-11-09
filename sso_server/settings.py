@@ -23,6 +23,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
+    "https://sso-server.fly.dev/"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -33,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
+    "https://sso-server.fly.dev/"
 ]
 
 
@@ -121,7 +123,7 @@ DATABASES = {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'connect_timeout': 10,
         },
-        'CONN_MAX_AGE': 600, 
+        'CONN_MAX_AGE': 600,
     }
 }
 
