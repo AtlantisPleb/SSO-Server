@@ -15,16 +15,18 @@ DATABASES = {
 }
 
 # Static files configuration
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'sso_app/static'),
+    os.path.join(BASE_DIR, 'sso_app', 'static'),
 ]
 
 # Add whitenoise middleware after security middleware
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+if 'whitenoise.middleware.WhiteNoiseMiddleware' not in MIDDLEWARE:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # Simplified static file serving
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
