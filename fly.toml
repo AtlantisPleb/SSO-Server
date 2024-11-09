@@ -29,8 +29,12 @@ console_command = '/code/manage.py shell'
 
 [processes]
   app = "python manage.py runserver 0.0.0.0:8000"
-  mysql = """mysqld --datadir /data/mysql \
-    --default-authentication-plugin mysql_native_password"""
+  mysql = """mkdir -p /data/mysql && \
+    mysql_install_db --datadir=/data/mysql --user=mysql && \
+    mysqld --datadir=/data/mysql \
+    --user=mysql \
+    --init-file=/app/init.sql \
+    --default-authentication-plugin=mysql_native_password"""
 
 [[statics]]
   guest_path = '/code/static'
