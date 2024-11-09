@@ -22,6 +22,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
+    "https://oidc1-052bc9374cf6.herokuapp.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -32,6 +33,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sandbox.scramblesolutions.com",
     "https://scramblesolutions.com",
     "http://localhost:3000",
+    "https://oidc1-052bc9374cf6.herokuapp.com"
 ]
 
 # Application definition
